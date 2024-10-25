@@ -24,7 +24,7 @@ model User {
   expenses    Expense[]    // Relation to Expense
   incomes     Income[]     // Relation to Income
   profits     Profit[]     // Relation to Profit
-  investments  Investment[] // Relation to Investment
+  
 }
 
 model Expense {
@@ -62,14 +62,14 @@ model Profit {
   userId         Int?      // Optional relation to User
 }
 
-model Investment {
-  id                Int      @id @default(autoincrement()) // Unique identifier for the investment
-  investment_type   String   // Type of investment
-  investment_amount Float     // Amount invested
-  investment_date   DateTime // Date of the investment
-  current_value     Float     // Current value of the investment
-  description       String?   // Description of the investment (optional)
+// model Investment {
+//   id                Int      @id @default(autoincrement()) // Unique identifier for the investment
+//   investment_type   String   // Type of investment
+//   investment_amount Float     // Amount invested
+//   investment_date   DateTime // Date of the investment
+//   current_value     Float     // Current value of the investment
+//   description       String?   // Description of the investment (optional)
   
-  user              User?     @relation(fields: [userId], references: [id])
-  userId            Int?      // Optional relation to User
-}
+//   user              User?     @relation(fields: [userId], references: [id])
+//   userId            Int?      // Optional relation to User
+// }
