@@ -34,7 +34,7 @@ app.use('/api/profit', profitRoutes);
 
 app.use(cors());
 
-app.get("/", (req, res) => res.send("Express on Vercel"));
+app.get("/", (req, res) => res.send("Home )"));
 
 //starting the server
 const PORT = process.env.PORT || 3001; // Use the PORT environment variable if set, otherwise default to 3000

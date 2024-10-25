@@ -152,6 +152,38 @@ async function updateUserById(req, res) {
   }
 }
 
+
+async function getUserTransactions(req, res) {
+  // Ensure req.user is set by the auth middleware
+  if (!req.user || !req.user.id) {
+    return res.status(401).json({ error: "Unauthorized: User not authenticated" });
+  }
+
+  const userId = parseInt(req.user.id, 10);
+  if (isNaN(userId)) {
+    return res.status(400).json({ error: "Invalid user ID" });
+  }
+
+  try {
+    console.log("Fetching transactions for user:", userId); // Debugging log
+
+    // Fetch user's income, expenses, and profits
+    const [income, expenses, profit] = await Promise.all([
+      prisma.income.findMany({ where: { userId } }),
+      prisma.expense.findMany({ where: { userId } }),
+      prisma.profit.findMany({ where: { userId } }),
+    ]);
+
+    // Send combined results as a response
+    return res.json({ income, expenses, profit });
+  } catch (error) {
+    console.error("Error in getUserTransactions:", error);
+    return res.status(500).json({ error: "An error occurred while fetching transactions" });
+  }
+}
+
+
+
 module.exports = {
   createUser,
   getAllUsers,
@@ -159,4 +191,5 @@ module.exports = {
   deleteUserById,
   updateUserById,
   loginUser,
+  getUserTransactions,
 };

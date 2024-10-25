@@ -46,5 +46,11 @@ router.delete("/user/:id", user.deleteUserById);
  */
 router.put("/user/:id", user.updateUserById);
 
+router.get("/user/:id/transactions", protect, (req, res) => {
+    console.log("Transaction route accessed");
+    user.getUserTransactions(req, res);
+ });
+ 
+
 // Export the router for use in other parts of the application
 module.exports = router;
