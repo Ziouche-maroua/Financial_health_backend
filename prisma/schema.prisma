@@ -24,6 +24,8 @@ model User {
   expenses    Expense[]    // Relation to Expense
   incomes     Income[]     // Relation to Income
   profits     Profit[]     // Relation to Profit
+  report     Report[]
+
   
 }
 
@@ -62,14 +64,14 @@ model Profit {
   userId         Int?      // Optional relation to User
 }
 
-// model Investment {
-//   id                Int      @id @default(autoincrement()) // Unique identifier for the investment
-//   investment_type   String   // Type of investment
-//   investment_amount Float     // Amount invested
-//   investment_date   DateTime // Date of the investment
-//   current_value     Float     // Current value of the investment
-//   description       String?   // Description of the investment (optional)
+model Report {
+  id         Int      @id @default(autoincrement())
+  userId     Int      // User who generated the report
+  type       String   // Report type, e.g., "Income Statement"
+  startDate  DateTime // Start of the report period
+  endDate    DateTime // End of the report period
+  createdAt  DateTime @default(now()) // Timestamp of report generation
   
-//   user              User?     @relation(fields: [userId], references: [id])
-//   userId            Int?      // Optional relation to User
-// }
+  user       User     @relation(fields: [userId], references: [id])
+}
+

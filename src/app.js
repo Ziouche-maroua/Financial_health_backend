@@ -24,6 +24,7 @@ const user = require("./routes/userRoutes");
 const expenseRoutes = require('./routes/expenseRoutes');
 const incomeRoutes = require('./routes/incomeRoutes');
 const profitRoutes = require('./routes/profitRoutes');
+const reportRoutes =require( './routes/reportRoutes.js');
 
 
 // Use routes
@@ -31,6 +32,8 @@ app.use("/api", user);
 app.use('/api/expense', expenseRoutes);
 app.use('/api/income', incomeRoutes);
 app.use('/api/profit', profitRoutes);
+app.use('/api', reportRoutes);
+
 
 app.use(cors());
 
